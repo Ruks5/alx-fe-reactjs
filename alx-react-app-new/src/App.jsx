@@ -1,5 +1,4 @@
 // src/App.jsx
-import { useState } from 'react';
 import './App.css';
 
 import WelcomeMessage from './components/WelcomeMessage';
@@ -10,17 +9,9 @@ import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
-    <div 
-      style={{ 
-        fontFamily: "Arial, sans-serif", 
-        backgroundColor: "#f0f4f8", 
-        minHeight: "100vh", 
-        display: "flex", 
-        flexDirection: "column" 
-      }}
-    >
+    <div style={{ fontFamily: "Arial, sans-serif", backgroundColor: "lightgray" }}>
       {/* Welcome Section */}
-      <div style={{ padding: "1rem", textAlign: "center", backgroundColor: "#e3f2fd" }}>
+      <div style={{ padding: "10px", textAlign: "center", backgroundColor: "white" }}>
         <WelcomeMessage />
       </div>
 
@@ -31,8 +22,8 @@ function App() {
       <MainContent />
 
       {/* User Profiles Section */}
-      <div style={{ padding: "2rem", backgroundColor: "#fff" }}>
-        <h1 style={{ textAlign: "center", color: "#333", marginBottom: "1.5rem" }}>User Profiles</h1>
+      <div style={{ padding: "10px", backgroundColor: "white", margin: "10px" }}>
+        <h1 style={{ textAlign: "center", color: "black" }}>User Profiles</h1>
         <UserProfile name="Alice" age={25} bio="Loves hiking and photography" />
         <UserProfile name="Bob" age={30} bio="Enjoys painting and traveling" />
         <UserProfile name="Charlie" age={28} bio="Passionate about coding and football" />
