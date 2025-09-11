@@ -3,8 +3,8 @@ import { create } from 'zustand';
 const useRecipeStore = create((set) => ({
   recipes: [],
   searchTerm: '',
-
-  // Explicit setter for search term
+  filteredRecipes: [],
+  setRecipes: (recipes) => set({ recipes, filteredRecipes: recipes }), // keep this for flow
   setSearchTerm: (term) =>
     set((state) => {
       const filtered = state.recipes.filter((recipe) =>
@@ -12,36 +12,28 @@ const useRecipeStore = create((set) => ({
       );
       return { searchTerm: term, filteredRecipes: filtered };
     }),
-
-  filteredRecipes: [],
-
   addRecipe: (newRecipe) =>
     set((state) => {
-      const updatedRecipes = [...state.recipes, newRecipe];
-      const filtered = updatedRecipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      return { recipes: updatedRecipes, filteredRecipes: filtered };
+      const updated = [...state.recipes, newRecipe];
+      return { recipes: updated, filteredRecipes: updated };
     }),
-
   updateRecipe: (updatedRecipe) =>
     set((state) => {
-      const updatedRecipes = state.recipes.map((recipe) =>
+      const updated = state.recipes.map((recipe) =>
         recipe.id === updatedRecipe.id ? updatedRecipe : recipe
       );
-      const filtered = updatedRecipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      return { recipes: updatedRecipes, filteredRecipes: filtered };
+      return {
+        recipes: updated,
+        filteredRecipes: updated,
+      };
     }),
-
   deleteRecipe: (id) =>
     set((state) => {
-      const updatedRecipes = state.recipes.filter((recipe) => recipe.id !== id);
-      const filtered = updatedRecipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      return { recipes: updatedRecipes, filteredRecipes: filtered };
+      const updated = state.recipes.filter((recipe) => recipe.id !== id);
+      return {
+        recipes: updated,
+        filteredRecipes: updated,
+      };
     }),
 }));
 
