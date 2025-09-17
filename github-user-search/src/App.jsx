@@ -1,6 +1,6 @@
-import SearchBar from  "./components/SearchBar";
+import SearchBar from "./components/SearchBar";
 
-function App()  {
+function App() {
   return (
     <div>
       <h1>GitHub User Search</h1>
@@ -8,4 +8,5 @@ function App()  {
     </div>
   );
 }
+
 export default App;
