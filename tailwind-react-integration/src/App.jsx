@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import UserProfile from './components/UserProfile'
 
 function App() {
   return (
@@ -25,9 +26,11 @@ function App() {
           This is a sample card styled with Tailwind CSS.
         </p>
       </div>
+
+      {/* UserProfile Component */}
+      <UserProfile />
     </div>
   )
 }
 
 export default App
-
