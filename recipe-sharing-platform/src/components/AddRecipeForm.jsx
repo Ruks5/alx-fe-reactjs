@@ -101,3 +101,20 @@ function AddRecipeForm() {
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows="6"
             placeholder="Describe the cooking steps..."
+          ></textarea>
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition"
+        >
+          Submit Recipe
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default AddRecipeForm;
