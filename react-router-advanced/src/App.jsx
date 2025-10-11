@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
 import { Profile } from './components/Profile.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 // Dummy Auth State Hook
 function useAuth() {
@@ -83,6 +84,15 @@ function App() {
 
         {/* Catch-all for 404 */}
         <Route path="*" element={<h2>Page Not Found</h2>} />
+
+        <Route
+          path="profile/*"
+          element={
+        <ProtectedRoute isAuthenticated={auth.isAuthenticated}>
+        <Profile />
+        </ProtectedRoute>
+     } 
+        />
       </Routes>
     </BrowserRouter>
   );
