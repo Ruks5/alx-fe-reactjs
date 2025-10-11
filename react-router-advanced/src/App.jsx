@@ -39,6 +39,12 @@ function UserProfile() {
   return <h3>User Profile Page for: {username}</h3>;
 }
 
+// New BlogPost Component for dynamic blog routing
+function BlogPost() {
+  const { id } = useParams();
+  return <h3>Blog Post Page for post ID: {id}</h3>;
+}
+
 // Main App Component
 function App() {
   const auth = useAuth();
@@ -49,6 +55,7 @@ function App() {
         <Link to="/">Home</Link> |{' '}
         <Link to="/profile">Profile</Link> |{' '}
         <Link to="/user/john">John's Profile (dynamic)</Link> |{' '}
+        <Link to="/blog/123">Sample Blog Post</Link> |{' '}
         <Link to="/login">Login</Link>
       </nav>
 
@@ -67,6 +74,9 @@ function App() {
 
         {/* Dynamic User Profile */}
         <Route path="user/:username" element={<UserProfile />} />
+
+        {/* Dynamic Blog Post Route */}
+        <Route path="blog/:id" element={<BlogPost />} />
 
         {/* Login */}
         <Route path="login" element={<Login login={auth.login} />} />
