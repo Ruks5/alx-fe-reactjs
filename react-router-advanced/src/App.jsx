@@ -73,13 +73,13 @@ function App() {
         />
 
         {/* Dynamic User Profile */}
-        <Route path="user/:username" element={<UserProfile />} />
+        <Route path="/user/:username" element={<UserProfile />} />
 
         {/* Dynamic Blog Post Route */}
-        <Route path="blog/:id" element={<BlogPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
 
         {/* Login */}
-        <Route path="login" element={<Login login={auth.login} />} />
+        <Route path="/login" element={<Login login={auth.login} />} />
 
         {/* Catch-all for 404 */}
         <Route path="*" element={<h2>Page Not Found</h2>} />
