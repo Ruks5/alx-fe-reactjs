@@ -1,6 +1,7 @@
 // src/App.jsx
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Link, Outlet, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
+import { Profile } from './components/Profile.jsx'; // only import Profile now
 
 // Dummy Auth State
 function useAuth() {
@@ -33,27 +34,6 @@ function Login({ login }) {
   );
 }
 
-// Profile Components for Nested Routing
-function Profile() {
-  return (
-    <div>
-      <h2>Profile Page</h2>
-      <nav>
-        <Link to="details">Details</Link> | <Link to="settings">Settings</Link>
-      </nav>
-      <Outlet /> {/* Nested Routes Render Here */}
-    </div>
-  );
-}
-
-function ProfileDetails() {
-  return <p>This is the profile details section.</p>;
-}
-
-function ProfileSettings() {
-  return <p>This is the profile settings section.</p>;
-}
-
 // Dynamic User Profile
 function UserProfile() {
   const { username } = useParams();
@@ -84,13 +64,7 @@ function App() {
               <Profile />
             </ProtectedRoute>
           }
-        >
-          {/* Nested Routes */}
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-          {/* Default nested route */}
-          <Route index element={<ProfileDetails />} />
-        </Route>
+        />
 
         {/* Dynamic Routing */}
         <Route path="user/:username" element={<UserProfile />} />
