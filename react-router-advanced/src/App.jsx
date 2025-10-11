@@ -1,7 +1,6 @@
-// src/App.jsx
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
-import { Profile } from './components/Profile.jsx'; // only import Profile now
+import { Profile, ProfileDetails, ProfileSettings } from './components/Profile.jsx';
 
 // Dummy Auth State
 function useAuth() {
@@ -56,7 +55,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        {/* Protected Profile Route */}
+        {/* Protected Profile Route with Nested Routes declared here */}
         <Route
           path="profile/*"
           element={
@@ -64,7 +63,11 @@ function App() {
               <Profile />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<ProfileDetails />} />
+          <Route path="details" element={<ProfileDetails />} />
+          <Route path="settings" element={<ProfileSettings />} />
+        </Route>
 
         {/* Dynamic Routing */}
         <Route path="user/:username" element={<UserProfile />} />

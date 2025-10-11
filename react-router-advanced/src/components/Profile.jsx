@@ -1,82 +1,22 @@
-// src/App.jsx
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
-import { Profile } from './components/Profile.jsx'; // Only import Profile now
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
 
-// Dummy Auth State
-function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
-  return { isAuthenticated, login, logout };
-}
-
-// ProtectedRoute Component
-function ProtectedRoute({ isAuthenticated, redirectPath = '/login', children }) {
-  if (!isAuthenticated) {
-    return <Navigate to={redirectPath} replace />;
-  }
-  return children;
-}
-
-// Home Component
-function Home() {
-  return <h2>Home Page</h2>;
-}
-
-// Login Component
-function Login({ login }) {
+export function Profile() {
   return (
     <div>
-      <h2>Login Page</h2>
-      <button onClick={login}>Click to Login</button>
+      <h2>Profile Page</h2>
+      <nav>
+        <Link to="details">Details</Link> | <Link to="settings">Settings</Link>
+      </nav>
+      <Outlet /> {/* Nested routes render here */}
     </div>
   );
 }
 
-// Dynamic User Profile
-function UserProfile() {
-  const { username } = useParams();
-  return <h3>User Profile Page for: {username}</h3>;
+export function ProfileDetails() {
+  return <p>This is the profile details section.</p>;
 }
 
-// App Component with Router & Routes
-function App() {
-  const auth = useAuth();
-
-  return (
-    <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link> |{' '}
-        <Link to="/profile">Profile</Link> |{' '}
-        <Link to="/user/john">John's Profile (dynamic)</Link> |{' '}
-        <Link to="/login">Login</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-
-        {/* Protected Profile Route */}
-        <Route
-          path="profile/*"
-          element={
-            <ProtectedRoute isAuthenticated={auth.isAuthenticated}>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Dynamic Routing */}
-        <Route path="user/:username" element={<UserProfile />} />
-
-        {/* Login */}
-        <Route path="login" element={<Login login={auth.login} />} />
-
-        {/* Catch all unmatched routes */}
-        <Route path="*" element={<h2>Page Not Found</h2>} />
-      </Routes>
-    </BrowserRouter>
-  );
+export function ProfileSettings() {
+  return <p>This is the profile settings section.</p>;
 }
-
-export default App;
