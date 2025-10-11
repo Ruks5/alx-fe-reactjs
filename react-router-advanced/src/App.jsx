@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
-import { Profile, ProfileDetails, ProfileSettings } from './components/Profile.jsx';
+import { Profile } from './components/Profile.jsx';
 
-// Dummy Auth State
+// Dummy Auth State Hook
 function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const login = () => setIsAuthenticated(true);
@@ -33,13 +33,13 @@ function Login({ login }) {
   );
 }
 
-// Dynamic User Profile
+// Dynamic User Profile Component
 function UserProfile() {
   const { username } = useParams();
   return <h3>User Profile Page for: {username}</h3>;
 }
 
-// App Component with Router & Routes
+// Main App Component
 function App() {
   const auth = useAuth();
 
@@ -55,7 +55,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        {/* Protected Profile Route with Nested Routes declared here */}
+        {/* Protected Profile Route */}
         <Route
           path="profile/*"
           element={
@@ -63,19 +63,15 @@ function App() {
               <Profile />
             </ProtectedRoute>
           }
-        >
-          <Route index element={<ProfileDetails />} />
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
+        />
 
-        {/* Dynamic Routing */}
+        {/* Dynamic User Profile */}
         <Route path="user/:username" element={<UserProfile />} />
 
         {/* Login */}
         <Route path="login" element={<Login login={auth.login} />} />
 
-        {/* Catch all unmatched routes */}
+        {/* Catch-all for 404 */}
         <Route path="*" element={<h2>Page Not Found</h2>} />
       </Routes>
     </BrowserRouter>
