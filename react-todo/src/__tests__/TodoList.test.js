@@ -1,3 +1,4 @@
+// ✅ Fixed TodoList.test.js
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
@@ -30,8 +31,7 @@ describe("TodoList Component", () => {
 
   test("deletes a todo", () => {
     render(<TodoList />);
-    const todo = screen.getByText("Learn React").closest("li");
-    const deleteButton = todo.querySelector("button");
+    const deleteButton = screen.getByLabelText("delete-Learn React");
     fireEvent.click(deleteButton);
     expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
   });
