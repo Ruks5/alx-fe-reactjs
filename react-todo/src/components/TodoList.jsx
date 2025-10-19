@@ -1,4 +1,3 @@
-// ✅ Fixed TodoList.jsx
 import React, { useState } from "react";
 import AddTodoForm from "./AddTodoForm";
 
@@ -9,22 +8,19 @@ const TodoList = () => {
   ]);
 
   const addTodo = (text) => {
-    setTodos((prevTodos) => [
-      ...prevTodos,
-      { id: Date.now(), text, completed: false },
-    ]);
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
   };
 
   const toggleTodo = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
+    setTodos(
+      todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
 
   const deleteTodo = (id) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -36,7 +32,6 @@ const TodoList = () => {
           <li
             key={todo.id}
             onClick={() => toggleTodo(todo.id)}
-            data-testid={`todo-${todo.id}`}
             style={{
               textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
@@ -45,11 +40,9 @@ const TodoList = () => {
             {todo.text}
             <button
               onClick={(e) => {
-                e.preventDefault();
                 e.stopPropagation();
                 deleteTodo(todo.id);
               }}
-              aria-label={`delete-${todo.text}`}
             >
               Delete
             </button>
